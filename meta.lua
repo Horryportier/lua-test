@@ -1,5 +1,5 @@
 local test_table_meta = {
-	--- adds key value if it dosen't exist
+	--- FIX: buffer oveloflow when using tihs code
 	---@param self TestFramework
 	---@param key string|number
 	--	__newindex = function(self, key, value)

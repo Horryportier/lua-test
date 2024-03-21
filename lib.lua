@@ -1,54 +1,49 @@
 local TestMeta = require("meta")
+local Format = require("format")
+local Error = require("error")
 
 -- TODO:
 -- - [ ] courutines?
--- - [ ] formaters for tybels
+-- - [x] formaters for tybels
 -- - [ ] global options
--- - [ ] logs
 
 -- TODO: custom formaters,
 ---@class TestOpts
 
--- NOTE: figure out how to do error
----@alias Error string|table|number|boolean
-
+---@see Test can either trow error using errro or assert or can return bool, error which is a custom error
 ---@alias Test { fn: fun(): Error|nil,  opts: table }
 
 ---@class TestFramework
 ---@field t Test[]
----@field add fun(self: TestFramework, id: string, fn: fun(): Error|nil, opts: table?)
+---@field add fun(self: TestFramework, id: string, fn: fun(): Error|nil, opts: table|nil)
 ---@field run fun(self: TestFramework)
----@field errfmt fun(err: Error)
----@field logfmt fun(msg: string)
----@field warnfmt fun(msg: string)
+---@field err fun(err: Error)
+---@field log fun(msg: string|number)
+---@field warn fun(msg: string)
 local T = TestMeta({})
 
+T.log = Format.logfmt
+T.err = Format.errfmt
+T.warn = Format.warnfmt
+
+---@diagnostic disable-next-line: redundant-parameter
 function T:add(id, fn, opts)
 	self.t[id] = { fn = fn, opts = opts }
-end
-
-T.logfmt = function(msg)
-	print("\027[32m" .. msg .. "\027[0m")
-end
-
-T.errfmt = function(err)
-	print("\027[31m" .. tostring(err) .. "\027[0m")
-end
-
-T.warnfmt = function(msg)
-	print("\027[33m" .. tostring(msg) .. "\027[0m")
 end
 
 function T:run()
 	for key, test in pairs(self.t) do
 		local succes, error = pcall(test.fn)
-		self.logfmt(tostring(key))
+		self.log(key)
 		if not succes then
 			if error ~= nil then
-				self.errfmt(error)
+				self.err(error)
 			else
-				self.errfmt("nil")
+				self.err(Error({}))
 			end
+		end
+		if succes and type(error) == "table" then
+			print(tostring(error))
 		end
 	end
 end
