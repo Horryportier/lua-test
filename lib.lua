@@ -1,4 +1,5 @@
-local TestMeta = require("meta")
+-- NOTE: not needed right now
+--local TestMeta = require("meta")
 local Format = require("format")
 local Error = require("error")
 
@@ -20,7 +21,7 @@ local Error = require("error")
 ---@field err fun(err: Error)
 ---@field log fun(msg: string|number)
 ---@field warn fun(msg: string)
-local T = TestMeta({})
+local T = {} --TestMeta({})
 
 T.log = Format.logfmt
 T.err = Format.errfmt
