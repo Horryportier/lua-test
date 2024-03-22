@@ -19,9 +19,6 @@ dependencies = {
 build = {
 	type = "builtin",
 	modules = {
-		test = "lib.lua",
-		error = "error.lua",
-		format = "format.lua",
-		utils = "utils.lua",
+		lua_custom_test = "lua_custom_test.lua",
 	},
 }
