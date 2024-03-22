@@ -19,6 +19,7 @@ dependencies = {
 build = {
 	type = "builtin",
 	modules = {
+		init = "init.lua",
 		test = "lib.lua",
 		error = "error.lua",
 		format = "format.lua",
