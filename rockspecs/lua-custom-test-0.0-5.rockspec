@@ -1,8 +1,8 @@
 package = "lua-custom-test"
-version = "0.5"
+version = "0.0-5"
 source = {
 	url = "git://github.com/Horryportier/lua-test/",
-	tag = "v0.5",
+	tag = "v0.0-5",
 }
 description = {
 	summary = "testing framwork with custom errors",
