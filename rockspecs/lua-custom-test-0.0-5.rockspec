@@ -1,7 +1,7 @@
 package = "lua-custom-test"
 version = "0.0-5"
 source = {
-	url = "git://github.com/Horryportier/lua-test/",
+	url = "git+https://github.com/Horryportier/lua-test.git",
 	tag = "v0.0-5",
 }
 description = {
