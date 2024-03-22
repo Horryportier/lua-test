@@ -21,7 +21,7 @@ build = {
 	modules = {
 		test = "lib.lua",
 		error = "error.lua",
-		format = "format",
-		utils = "utils",
+		format = "format.lua",
+		utils = "utils.lua",
 	},
 }
